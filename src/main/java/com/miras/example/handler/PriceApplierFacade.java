@@ -1,4 +1,3 @@
-/* Copyright 2018 Sabre Holdings */
 package com.miras.example.handler;
 
 import com.miras.example.discount.DiscountType;

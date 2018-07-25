@@ -1,4 +1,3 @@
-/* Copyright 2018 Sabre Holdings */
 package com.miras.example;
 
 import com.miras.example.handler.PriceApplierFacade;
