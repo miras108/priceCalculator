@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <context:property-placeholder location="classpath:config.properties" />
+
+  <bean id="noDiscountStrategy" class="com.miras.example.discount.NoDiscountStrategy"/>
+  <bean id="smallDiscountStrategy" class="com.miras.example.discount.SmallDiscountStrategy"/>
+  <bean id="halfPriceDiscountStrategy" class="com.miras.example.discount.HalfPriceDiscountStrategy"/>
+
+  <bean id="noDiscountPriceApplier" class="com.miras.example.handler.PriceApplier">
+    <constructor-arg value="${currency}"/>
+    <constructor-arg ref="noDiscountStrategy"/>
+  </bean>
+
+  <bean id="smallDiscountPriceApplier" class="com.miras.example.handler.PriceApplier">
+    <constructor-arg value="${currency}"/>
+    <constructor-arg ref="smallDiscountStrategy"/>
+  </bean>
+
+  <bean id="halfPriceDiscountApplier" class="com.miras.example.handler.PriceApplier">
+    <constructor-arg value="${currency}"/>
+    <constructor-arg ref="halfPriceDiscountStrategy"/>
+  </bean>
+
+  <bean id="priceApplierFacade" class="com.miras.example.handler.PriceApplierFacade">
+    <constructor-arg value="${discount.type}"/>
+    <constructor-arg ref="noDiscountPriceApplier"/>
+    <constructor-arg ref="smallDiscountPriceApplier"/>
+    <constructor-arg ref="halfPriceDiscountApplier"/>
+  </bean>
+
+</beans>
